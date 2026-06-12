@@ -21,6 +21,7 @@ app.use('/api/questions', require('./routes/questions'));
 app.use('/api/practice', require('./routes/practice'));
 app.use('/api/mocktests', require('./routes/mocktests'));
 app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/ai', require('./routes/ai'));
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'PrepWise API is running' });
