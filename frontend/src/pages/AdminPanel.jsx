@@ -108,9 +108,10 @@ const AdminPanel = () => {
     }
   };
 
-  const handleCsvUpload = async () => {
-    const file = fileRef.current?.files[0];
+  const handleCsvUpload = async (e) => {
+    const file = e.target.files[0];
     if (!file) return;
+    setCsvMsg('Uploading...');
     const formData = new FormData();
     formData.append('file', file);
     try {
@@ -119,10 +120,10 @@ const AdminPanel = () => {
       });
       setCsvMsg(res.data.message);
       fetchQuestions();
-      fileRef.current.value = '';
     } catch (err) {
       setCsvMsg(err.response?.data?.error || 'CSV upload failed');
     }
+    e.target.value = '';
   };
 
   return (
@@ -137,10 +138,8 @@ const AdminPanel = () => {
       <div className="bg-white border border-slate-200 rounded-lg p-4 mb-6">
         <p className="text-sm font-semibold text-slate-700 mb-2 flex items-center gap-2"><Upload size={16} /> Bulk Upload (CSV)</p>
         <p className="text-xs text-slate-500 mb-3">CSV format: subject, topic, difficulty, isPYQ, pyqYear, questionText, optionA, optionB, optionC, optionD, correctOption (A/B/C/D), solution</p>
-        <div className="flex gap-3 items-center">
-          <input type="file" accept=".csv" ref={fileRef} className="text-sm" />
-          <button onClick={handleCsvUpload} className="btn-primary text-sm">Upload</button>
-        </div>
+        <input type="file" accept=".csv" ref={fileRef} onChange={handleCsvUpload} className="hidden" />
+        <button onClick={() => fileRef.current?.click()} className="btn-primary text-sm flex items-center gap-2"><Upload size={14} /> Upload CSV File</button>
         {csvMsg && <p className="text-sm text-green-700 mt-2">{csvMsg}</p>}
       </div>
 
