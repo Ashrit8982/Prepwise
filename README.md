@@ -51,6 +51,3 @@ This project was built using the **MERN Stack** with a focus on clean, scalable 
    npm run dev
    ```
 
-## 📐 Architecture Note
-
-This project strictly adheres to best practices for a student-built MERN stack application. It avoids unnecessary enterprise bloat (like Docker or Redux) in favor of a clean, highly readable, and maintainable Model-View-Controller structure.
